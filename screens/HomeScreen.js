@@ -1,7 +1,9 @@
 import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import ScreenWrapper from '../components/ScreenWrapper';
+import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
+import EmptyList from '../components/emptyList';
+import {useNavigation} from '@react-navigation/native';
 
 let items = [
   {
@@ -32,11 +34,12 @@ let items = [
 ];
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   return (
     <ScreenWrapper className="flex-1">
       <View className="flex-row justify-between items-center p-4">
         <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
-          Expensify
+          Ledger
         </Text>
         <TouchableOpacity className="p-2 px-3 bg-white border border-gray-200 rounded-full">
           <Text className={`${colors.heading}`}>Đăng xuất</Text>
@@ -51,18 +54,21 @@ export default function HomeScreen() {
       <View className="px-4 space-y-4">
         <View className="flex-row justify-between items-center">
           <Text className={`${colors.heading} font-bold text-xl`}>Gần đây</Text>
-          <TouchableOpacity className="p-2 px-3 bg-white border border-gray-200 rounded-full">
-            <Text className={`${colors.heading}`}>Thêm</Text>
+          <TouchableOpacity
+            className="p-2 px-3 bg-white border border-gray-200 rounded-full"
+            onPress={() => navigation.navigate('AddLedger')}>
+            <Text className={`${colors.heading}`}>Thêm sổ</Text>
           </TouchableOpacity>
         </View>
         <View>
           <FlatList
-            style={{height: 420}}
+            style={style.flatList}
             data={items}
             numColumns={2}
+            ListEmptyComponent={<EmptyList message={'Không có dữ liệu'} />}
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
+            columnWrapperStyle={style.flatList.columnWrapperStyle}
             className="mx-1"
             renderItem={({item}) => {
               return (
@@ -88,3 +94,12 @@ export default function HomeScreen() {
     </ScreenWrapper>
   );
 }
+
+const style = {
+  flatList: {
+    height: 420,
+    columnWrapperStyle: {
+      justifyContent: 'space-between',
+    },
+  },
+};
