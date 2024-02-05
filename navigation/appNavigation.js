@@ -2,7 +2,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import HomeScreen from '../screens/HomeScreen';
-import AddLedger from '../screens/AddLedger';
+import AddLedgerScreen from '../screens/AddLedgerScreen';
+import LedgerExpensesScreen from '../screens/LedgerExpensesScreen';
+import AddExpenseScreen from "../screens/AddExpenseScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +20,17 @@ export default function AppNavigation() {
         <Stack.Screen
           options={{headerShown: false}}
           name="AddLedger"
-          component={AddLedger}
+          component={AddLedgerScreen}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="LedgerExpenses"
+          component={LedgerExpensesScreen}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="AddExpense"
+          component={AddExpenseScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,21 +1,39 @@
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import ScreenWrapper from '../components/screenWrapper';
 import BackButton from '../components/backButton';
 import {colors} from '../theme';
-import {useNavigation} from '@react-navigation/native';
 
-export default function AddLedger() {
+const categories = [
+  {
+    id: 1,
+    title: 'Mua sắm',
+  },
+  {
+    id: 2,
+    title: 'Ăn uống',
+  },
+  {
+    id: 3,
+    title: 'Sức khỏe',
+  },
+  {
+    id: 4,
+    title: 'Cộng đồng',
+  },
+  {
+    id: 5,
+    title: 'Khác',
+  },
+];
+
+export default function AddExpenseScreen() {
   const [name, setName] = useState('');
-  const [note, setNote] = useState('');
+  const [amount, setAmount] = useState('');
+  const [category, setCategory] = useState('');
 
   const navigation = useNavigation();
-
-  const handleAddLedger = () => {
-    if (name && note) {
-      navigation.navigate('Home');
-    }
-  };
 
   return (
     <ScreenWrapper>
@@ -26,20 +44,20 @@ export default function AddLedger() {
               <BackButton />
             </View>
             <Text className={`${colors.heading} text-xl font-bold text-center`}>
-              Thêm sổ
+              Thêm khoản chi
             </Text>
           </View>
 
           <View className="flex-row justify-center my-3 mt-5">
             <Image
-              className="h-72 w-72"
+              className="h-56 w-56"
               source={require('../assets/images/4.png')}
             />
           </View>
 
           <View className="space-y-2 mx-2">
             <Text className={`${colors.heading} px-1 text-lg font-bold`}>
-              Tên sổ
+              Tên
             </Text>
             <TextInput
               className="p-4 bg-white rounded-2xl mb-3"
@@ -50,24 +68,34 @@ export default function AddLedger() {
               onChangeText={value => setName(value)}
             />
             <Text className={`${colors.heading} px-1 text-lg font-bold`}>
-              Ghi chú
+              Số tiền
             </Text>
             <TextInput
               className="p-4 bg-white rounded-2xl mb-3"
               ref={input => {
                 this.secondTextInput = input;
               }}
-              value={note}
-              onChangeText={value => setNote(value)}
             />
+          </View>
+
+          <View className="mx-2 space-x-2">
+            <Text className="text-lg font-bold">Loại</Text>
+            <View className="flex-row flex-wrap items-center">
+              {categories.map(cat => {
+                return (
+                  <TouchableOpacity className="rounded-full bg-white px-4 p-3 mb-2 mr-2">
+                    <Text>{cat.title}</Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
         </View>
 
         <View>
           <TouchableOpacity
             style={{backgroundColor: colors.button}}
-            className="my-6 rounded-full p-3 shadow-sm mx-2"
-            onPress={handleAddLedger}>
+            className="my-6 rounded-full p-3 shadow-sm mx-2">
             <Text className="text-center text-white text-lg font-bold">
               Thêm
             </Text>
