@@ -99,6 +99,7 @@ export default function LedgerExpensesScreen() {
           <View>
             <FlatList
               style={style.flatList}
+              contentContainerStyle={style.flatListContentContainerStyle}
               data={items}
               ListEmptyComponent={<EmptyList message={'Không có dữ liệu'} />}
               keyExtractor={item => item.id}
@@ -121,5 +122,8 @@ const style = {
     columnWrapperStyle: {
       justifyContent: 'space-between',
     },
+  },
+  flatListContentContainerStyle: {
+    paddingBottom: 50,
   },
 };

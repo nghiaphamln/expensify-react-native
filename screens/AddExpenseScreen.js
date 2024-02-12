@@ -35,6 +35,13 @@ export default function AddExpenseScreen() {
 
   const navigation = useNavigation();
 
+  const handleChangeText = newText => {
+    const regex = /^[0-9-]+$/;
+    if (regex.test(newText)) {
+      setAmount(newText);
+    }
+  };
+
   return (
     <ScreenWrapper>
       <View className="flex justify-between h-full mx-4">
@@ -72,6 +79,9 @@ export default function AddExpenseScreen() {
             </Text>
             <TextInput
               className="p-4 bg-white rounded-2xl mb-3"
+              keyboardType="numeric"
+              value={amount}
+              onChangeText={value => handleChangeText(value)}
               ref={input => {
                 this.secondTextInput = input;
               }}
@@ -82,8 +92,15 @@ export default function AddExpenseScreen() {
             <Text className="text-lg font-bold">Loại</Text>
             <View className="flex-row flex-wrap items-center">
               {categories.map(cat => {
+                let bgColor = 'bg-white';
+                if (cat.id === category) {
+                  bgColor = 'bg-green-200';
+                }
                 return (
-                  <TouchableOpacity className="rounded-full bg-white px-4 p-3 mb-2 mr-2">
+                  <TouchableOpacity
+                    className={`rounded-full ${bgColor} px-4 p-3 mb-2 mr-2`}
+                    onPress={() => setCategory(cat.id)}
+                    key={cat.id}>
                     <Text>{cat.title}</Text>
                   </TouchableOpacity>
                 );
@@ -96,7 +113,9 @@ export default function AddExpenseScreen() {
           <TouchableOpacity
             style={{backgroundColor: colors.button}}
             className="my-6 rounded-full p-3 shadow-sm mx-2">
-            <Text className="text-center text-white text-lg font-bold">
+            <Text
+              className="text-center text-white text-lg font-bold"
+              onPress={() => navigation.goBack()}>
               Thêm
             </Text>
           </TouchableOpacity>

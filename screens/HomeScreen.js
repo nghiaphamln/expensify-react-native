@@ -4,6 +4,7 @@ import ScreenWrapper from '../components/screenWrapper';
 import {colors} from '../theme';
 import EmptyList from '../components/emptyList';
 import {useNavigation} from '@react-navigation/native';
+import randomImage from "../assets/images/randomImage";
 
 let items = [
   {
@@ -63,6 +64,7 @@ export default function HomeScreen() {
         <View>
           <FlatList
             style={style.flatList}
+            contentContainerStyle={style.flatListContentContainerStyle}
             data={items}
             numColumns={2}
             ListEmptyComponent={<EmptyList message={'Không có dữ liệu'} />}
@@ -76,10 +78,7 @@ export default function HomeScreen() {
                   className="bg-white p-3 rounded-2xl mb-3 shadow-sm"
                   onPress={() => navigation.navigate('LedgerExpenses')}>
                   <View>
-                    <Image
-                      source={require('../assets/images/1.png')}
-                      className="w-36 h-36 mb-2"
-                    />
+                    <Image source={randomImage()} className="w-36 h-36 mb-2" />
                     <Text className={`${colors.heading} font-bold`}>
                       {item.place}
                     </Text>
@@ -103,5 +102,8 @@ const style = {
     columnWrapperStyle: {
       justifyContent: 'space-between',
     },
+  },
+  flatListContentContainerStyle: {
+    paddingBottom: 20,
   },
 };
