@@ -14,7 +14,7 @@ const authApi = {
   },
 
   register: userAccount => {
-    const url = `${BASE_URL}/registry`;
+    const url = `${BASE_URL}/register`;
     return axiosClient.post(url, userAccount);
   },
 };

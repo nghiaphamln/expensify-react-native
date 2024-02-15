@@ -1,1 +1,1 @@
-export const REACT_APP_API_URL = 'https://zelochat.xyz/api';
+export const REACT_APP_API_URL = 'http://10.0.2.2:3000';

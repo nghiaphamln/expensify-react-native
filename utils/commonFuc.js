@@ -1,8 +1,4 @@
-import {
-  Alert,
-  Platform,
-  ToastAndroid,
-} from 'react-native';
+import {Alert, Platform, ToastAndroid} from 'react-native';
 
 const commonFuc = {
   notifyMessage: message => {
@@ -11,6 +7,12 @@ const commonFuc = {
     } else {
       Alert.alert(message);
     }
+  },
+  IsEmpty: obj => {
+    if (!obj) {
+      return true;
+    }
+    return Object.keys(obj).length === 0;
   },
 };
 export default commonFuc;
