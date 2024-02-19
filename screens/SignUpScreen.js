@@ -2,7 +2,6 @@ import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {colors} from '../theme';
 import React, {useState} from 'react';
 import Snackbar from 'react-native-snackbar';
-import ScreenWrapper from '../components/screenWrapper';
 import BackButton from '../components/backButton';
 import {useNavigation} from '@react-navigation/native';
 import authApi from '../api/authApi';
@@ -10,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {setLoading} from '../redux/globalSlice';
 import commonFuc from '../utils/commonFuc';
 import LoadingSpinner from '../components/loadingSpinner';
+import KeyboardScroll from '../components/keyboardScroll';
 
 export default function SignUpScreen() {
   const {isLoading} = useSelector(state => state.global);
@@ -59,7 +59,7 @@ export default function SignUpScreen() {
   };
 
   return (
-    <ScreenWrapper>
+    <KeyboardScroll>
       <LoadingSpinner isLoading={isLoading} />
       <View className="flex justify-between h-full mx-4">
         <View>
@@ -142,6 +142,6 @@ export default function SignUpScreen() {
           </TouchableOpacity>
         </View>
       </View>
-    </ScreenWrapper>
+    </KeyboardScroll>
   );
 }

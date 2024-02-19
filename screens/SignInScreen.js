@@ -1,14 +1,14 @@
 import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {colors} from '../theme';
 import React from 'react';
-import ScreenWrapper from '../components/screenWrapper';
 import BackButton from '../components/backButton';
 import {useNavigation} from '@react-navigation/native';
+import KeyboardScroll from '../components/keyboardScroll';
 
 export default function SignInScreen() {
   const navigation = useNavigation();
   return (
-    <ScreenWrapper>
+    <KeyboardScroll>
       <View className="flex justify-between h-full mx-4">
         <View>
           <View className="relative mt-5">
@@ -64,6 +64,6 @@ export default function SignInScreen() {
           </TouchableOpacity>
         </View>
       </View>
-    </ScreenWrapper>
+    </KeyboardScroll>
   );
 }
